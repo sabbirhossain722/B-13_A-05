@@ -4,15 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+
+
     <title>Document</title>
-    <style>
-        .card_container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-    </style>
 </head>
 
 <body>
@@ -34,9 +29,12 @@
 
     <div id="card">
         <div class="container flex gap-2 mb-4 mx-auto p-4 shadow-md mt-4">
-            <button class="rounded-lg px-6 py-2 bg-indigo-600 text-white" onclick="loadData()">All</button>
-            <button class="rounded-lg px-6 py-2 border border-[#e4e4e7]">Open</button>
-            <button class="rounded-lg px-6 py-2 border border-[#e4e4e7]">Closed</button>
+            <button class="rounded-lg px-6 py-2 border border-[#e4e4e7] bg-indigo-600 text-white" id="all"
+                onclick="loadData('all', this)">All</button>
+            <button class="rounded-lg px-6 py-2 border border-[#e4e4e7]" id="open"
+                onclick="loadData('open', this)">Open</button>
+            <button class="rounded-lg px-6 py-2 border border-[#e4e4e7]" id="close"
+                onclick="loadData('close', this)">Closed</button>
         </div>
     </div>
 
@@ -47,7 +45,7 @@
                     <img src="./assets/Aperture.png" alt="">
                 </div>
                 <div class="content">
-                    <h4 class="font-semibold text-lg">50 Issues</h4>
+                    <h4 id="total" class="font-semibold text-lg">50 Issues</h4>
                     <p class="font-normal text-base text-[#64748b]">Track and manage your project issues</p>
                 </div>
             </div>
@@ -68,12 +66,59 @@
     <div id="cards">
         <div id="card_container"
             class="container  items-center justify-center  mx-auto p-4 shadow-md mt-4 bg-[#fbfbfb] grid grid-cols-4 grid-rows-1 gap-4">
-
             <!-- card -->
-            
         </div>
     </div>
 
+
+    <!-- <button class="btn" onclick="card_details_modal.showModal()">open modal</button> -->
+    <dialog id="card_details_modal" class="modal">
+        <div class="modal-box  card-container container mx-auto mt-4 p-6 w-[700px] h-auto bg-white rounded-lg shadow-xl">
+            <h3 id="modal_title" class="font-bold text-2xl text-gray-800">Fix broken image uploads</h3>
+            <div class="details mt-3">
+                <ol class="flex text-center justify-start gap-4">
+                    <li id="modal_status" class="rounded-[100px] p-2 text-center bg-[#00a96e] text-white font-medium text-xs">Opened</li>
+                    <li id="modal_author"> Fahim Ahmed</li>
+                    <li id="modal_created_at">22/02/2026</li>
+                </ol>
+            </div>
+            <div class="flex gap-2 mt-3">
+                <span
+                    class="px-3 py-1 font-medium text-xs rounded-[100px]  bg-[#feecec] text-red-500 flex items-center gap-2 border border-[#fecaca]">
+                    <img src="./assets/BugDroid.png" alt="">
+                    <span id="modal_labels_0"></span>
+                </span>
+                <span
+                    class="px-3 py-1 font-medium text-xs rounded-[100px]  bg-[#fff8db] text-amber-600 flex items-center gap-2 border border-[#fde68a]">
+                    <img src="./assets/Lifebuoy.png" alt="">
+                    <span id="modal_labels_1" class=""></span>
+                </span>
+            </div>
+            <p id="modal_details" class="mt-4 mb-5">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
+            <div class="card bg-[#F8FAFC] rounded-lg p-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="Assignee">
+                        <h6 class="font-normal text-base text-slate-500">Assignee</h6>
+                        <p id="modal_assignee" class="font-semibold text-base text-gray-800">Fahim Ahmed</p>
+                    </div>
+                    <div class="status">
+                        <h6 class="font-normal text-base text-slate-500">Priority</h6>
+                        <p id="modal_priority" class="font-semibold text-base text-gray-800">High</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn rounded px-4 py-3 bg-[#4a00ff] font-semibold text-base text-white">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="./posts.js"></script>
 </body>
 
