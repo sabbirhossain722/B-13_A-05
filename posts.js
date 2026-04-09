@@ -121,6 +121,26 @@ async function openModal(postId) {
 };
 
 
+let searchInput = document.getElementById("search");
+searchInput.addEventListener("input", (e) =>{
+    const searchTerm = e.target.value.toLowerCase();
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q={searchText}`;
+    fetch(url.replace("{searchText}", searchTerm))
+        .then(res => res.json())
+        .then((json) => {
+            let posts = json.data;
+            if (posts.length === 0) {
+                    document.getElementById("card_container").innerHTML =
+                        "<p class='text-center text-gray-500'>No results found</p>";
+                    return;
+                }
+            displayPost(posts);
+        });
+        if (searchTerm === "") {
+            loadData();
+            return;
+        }
+});
 
 
 loadData();
